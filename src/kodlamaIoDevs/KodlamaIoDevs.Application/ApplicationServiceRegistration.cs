@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using KodlamaIoDevs.Application.Features.Languages.Rules;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace KodlamaIoDevs.Application
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
+            services.AddTransient<LanguageBusinessRules>();
             
 
             return services;

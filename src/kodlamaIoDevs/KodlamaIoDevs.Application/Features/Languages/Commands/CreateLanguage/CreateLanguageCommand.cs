@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
+using KodlamaIoDevs.Application.Features.Languages.Rules;
 using KodlamaIoDevs.Application.Services.Repositories;
 using KodlamaIoDevs.Domain.Entities;
 using MediatR;
@@ -20,16 +21,20 @@ namespace KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage
 
             private readonly ILanguageRepository _repository;
             private readonly IMapper _mapper;
+            private readonly LanguageBusinessRules _rules;
 
-            public CreateLanguageHandler(ILanguageRepository repository, IMapper mapper)
+            public CreateLanguageHandler(ILanguageRepository repository, IMapper mapper, LanguageBusinessRules rules)
             {
                 _repository = repository;
                 _mapper = mapper;
+                _rules = rules;
             }
 
 
             public async Task<CreateLanguageDto> Handle(CreateLanguageCommand request, CancellationToken cancellationToken)
             {
+                await _rules.LanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
+
                 Language mappedLanguage=_mapper.Map<Language>(request);
                 Language createLanguage = await _repository.AddAsync(mappedLanguage);
                 CreateLanguageDto createLanguageDto = _mapper.Map<CreateLanguageDto>(createLanguage);
