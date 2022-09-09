@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage;
+using KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
 using KodlamaIoDevs.Domain.Entities;
 using System;
@@ -16,6 +17,8 @@ namespace KodlamaIoDevs.Application.Features.Languages.Profiles
         {
             CreateMap<Language, CreateLanguageDto>().ReverseMap();
             CreateMap<Language, CreateLanguageCommand>().ReverseMap();
+            CreateMap<Language, UpdateLanguageDto>().ReverseMap();
+            CreateMap<Language, UpdateLanguageCommand>().ReverseMap();
         }
     }
 }
