@@ -1,7 +1,10 @@
-﻿using KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage;
+﻿using Core.Application.Requests;
+using KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Commands.DeleteLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
+using KodlamaIoDevs.Application.Features.Languages.Models;
+using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLangues;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +12,15 @@ namespace WebAPI.Controllers
 {
     public class LanguagesController : BaseController
     {
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllList([FromQuery] PageRequest pageRequest)
+        {
+            GetAllLanguagesQuery getAllLanguageQuery = new() { PageRequest = pageRequest };
+            LanguageListModel result = await Mediator.Send(getAllLanguageQuery);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateLanguageCommand createLanguageCommand)
         {
