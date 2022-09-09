@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
+using KodlamaIoDevs.Application.Features.Languages.Rules;
 using KodlamaIoDevs.Application.Services.Repositories;
 using KodlamaIoDevs.Domain.Entities;
 using MediatR;
@@ -21,18 +22,20 @@ namespace KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage
         {
 
             private readonly ILanguageRepository _repository;
+            private readonly LanguageBusinessRules _rules;
             private readonly IMapper _mapper;
 
-            public UpdateLanguageHandler(ILanguageRepository repository, IMapper mapper)
+            public UpdateLanguageHandler(ILanguageRepository repository, IMapper mapper, LanguageBusinessRules rules)
             {
                 _repository = repository;
                 _mapper = mapper;
+                _rules = rules;
             }
 
 
             public async Task<UpdateLanguageDto> Handle(UpdateLanguageCommand request, CancellationToken cancellationToken)
             {
-                Language language =  _repository.Get(x => x.Id == request.Id);
+                Language language = await _rules.GetLanguageAsync(request.Id);
                 language.Name = request.Name;
  
                 Language updatedLanguage = await _repository.UpdateAsync(language);
