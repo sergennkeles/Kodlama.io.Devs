@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.Languages.Dtos
 {
-    public class UpdateLanguageDto:BaseDto
+    public class GetByIdLanguageDto:BaseDto
     {
-
-
+     
     }
 }

@@ -23,6 +23,9 @@ namespace KodlamaIoDevs.Application.Features.Languages.Profiles
             CreateMap<Language, UpdateLanguageCommand>().ReverseMap();
             CreateMap<IPaginate<Language>, LanguageListModel>().ReverseMap();
             CreateMap<Language,LanguageListDto>().ReverseMap();
+            CreateMap<Language, GetByIdLanguageDto>().ReverseMap();
+
+
 
         }
     }
