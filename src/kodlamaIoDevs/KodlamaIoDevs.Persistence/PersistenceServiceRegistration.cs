@@ -23,6 +23,8 @@ namespace KodlamaIoDevs.Persistence
                                                      options.UseSqlServer(
                                                          configuration.GetConnectionString("KodlamaIODevsConnectionString")));
             services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+
 
             return services;
         }
