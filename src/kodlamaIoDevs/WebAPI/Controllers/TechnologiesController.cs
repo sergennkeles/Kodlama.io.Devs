@@ -1,10 +1,12 @@
 ﻿using Core.Application.Requests;
+using KodlamaIoDevs.Application.Features.Languages.Queries.GetByIdLanguage;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.CreateTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.DeleteTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.UpdateTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Dtos;
 using KodlamaIoDevs.Application.Features.Technologies.Models;
 using KodlamaIoDevs.Application.Features.Technologies.Queries.GetAllTechnologies;
+using KodlamaIoDevs.Application.Features.Technologies.Queries.GetByIdTechnology;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -18,6 +20,14 @@ namespace WebAPI.Controllers
             TechnologyListModel result = await Mediator.Send(getAllTechnologyQuery);
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await Mediator.Send(new GetByIdTechnologyQuery() { Id = id });
+            return Ok(result);
+        }
+
 
 
         [HttpPost]
