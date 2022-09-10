@@ -17,6 +17,8 @@ namespace KodlamaIoDevs.Application.Features.Technologies.Profiles
         {
             CreateMap<Technology, CreateTechnologyDto>().ReverseMap();
             CreateMap<Technology, CreateTechnologyCommand>().ReverseMap();
+            CreateMap<Technology,UpdateTechnologyDto>().ReverseMap();   
+            
 
         }
     }
