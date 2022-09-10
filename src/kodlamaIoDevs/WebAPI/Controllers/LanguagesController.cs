@@ -4,6 +4,7 @@ using KodlamaIoDevs.Application.Features.Languages.Commands.DeleteLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
 using KodlamaIoDevs.Application.Features.Languages.Models;
+using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLanguagesWithTechnologyQuery;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLangues;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetByIdLanguage;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,14 @@ namespace WebAPI.Controllers
         {
             GetAllLanguagesQuery getAllLanguageQuery = new() { PageRequest = pageRequest };
             LanguageListModel result = await Mediator.Send(getAllLanguageQuery);
+            return Ok(result);
+        }
+
+        [HttpGet("getAllTLanguagesWithTechnology")]
+        public async Task<IActionResult> GetAllLanguagesWithTechnology([FromQuery] PageRequest pageRequest)
+        {
+            GetAllLanguagesWithTechnologyQuery getAllTechnologyQuery = new() { PageRequest = pageRequest };
+            LanguageListWithTechnologyModel result = await Mediator.Send(getAllTechnologyQuery);
             return Ok(result);
         }
 

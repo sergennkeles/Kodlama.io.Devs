@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLanguagesWithTechnologyQuery;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetByIdLanguage;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.CreateTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.DeleteTechnology;
@@ -21,6 +22,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
