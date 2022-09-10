@@ -12,19 +12,19 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.Languages.Queries.GetByIdLanguage
 {
-    public class GetByIdLanguageQuery:IRequest<GetByIdLanguageDto>
+    public class GetByIdLanguageQuery : IRequest<GetByIdLanguageDto>
     {
         public int Id { get; set; }
         public class GetByIdLanguageQueryHandler : IRequestHandler<GetByIdLanguageQuery, GetByIdLanguageDto>
         {
 
-            private readonly ILanguageRepository _repository;
+
             private readonly LanguageBusinessRules _rules;
             private readonly IMapper _mapper;
 
             public GetByIdLanguageQueryHandler(ILanguageRepository repository, IMapper mapper, LanguageBusinessRules rules)
             {
-                _repository = repository;
+
                 _mapper = mapper;
                 _rules = rules;
             }
@@ -32,7 +32,7 @@ namespace KodlamaIoDevs.Application.Features.Languages.Queries.GetByIdLanguage
             public async Task<GetByIdLanguageDto> Handle(GetByIdLanguageQuery request, CancellationToken cancellationToken)
             {
                 Language language = await _rules.GetLanguageAsync(request.Id);
-                GetByIdLanguageDto languageDto=_mapper.Map<GetByIdLanguageDto>(language);
+                GetByIdLanguageDto languageDto = _mapper.Map<GetByIdLanguageDto>(language);
                 return languageDto;
             }
         }
