@@ -1,16 +1,24 @@
-﻿using KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage;
-using KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage;
-using KodlamaIoDevs.Application.Features.Languages.Dtos;
+﻿using Core.Application.Requests;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.CreateTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.DeleteTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.UpdateTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Dtos;
+using KodlamaIoDevs.Application.Features.Technologies.Models;
+using KodlamaIoDevs.Application.Features.Technologies.Queries.GetAllTechnologies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
     public class TechnologiesController : BaseController
     {
+        [HttpGet]
+        public async Task<IActionResult> GetAllList([FromQuery] PageRequest pageRequest)
+        {
+            GetAllTechnologyQuery getAllTechnologyQuery = new() { PageRequest = pageRequest };
+            TechnologyListModel result = await Mediator.Send(getAllTechnologyQuery);
+            return Ok(result);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateTechnologyCommand createTechnologyCommand)
