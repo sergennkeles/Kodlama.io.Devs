@@ -2,6 +2,7 @@
 using KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.CreateTechnology;
+using KodlamaIoDevs.Application.Features.Technologies.Commands.DeleteTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Commands.UpdateTechnology;
 using KodlamaIoDevs.Application.Features.Technologies.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateTechnologyCommand updateTechnologyCommand)
         {
             UpdateTechnologyDto result = await Mediator.Send(updateTechnologyCommand);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await Mediator.Send(new DeleteTechnologyCommand() { Id=id});
             return Ok(result);
         }
     }
