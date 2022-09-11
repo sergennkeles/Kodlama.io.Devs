@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
 using KodlamaIoDevs.Application.Features.Languages.Rules;
 using KodlamaIoDevs.Application.Services.Repositories;
@@ -12,9 +13,11 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage
 {
-    public class CreateLanguageCommand:IRequest<CreateLanguageDto>
+    public class CreateLanguageCommand:IRequest<CreateLanguageDto>, ISecuredRequest
     {
         public string? Name { get; set; }
+
+        public string[] Roles => new String[] {"admin" };
 
         public class CreateLanguageHandler : IRequestHandler<CreateLanguageCommand, CreateLanguageDto>
         {

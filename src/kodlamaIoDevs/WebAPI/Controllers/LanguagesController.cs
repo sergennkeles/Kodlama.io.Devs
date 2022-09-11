@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost,Authorize]
     
         public async Task<IActionResult> Add([FromBody] CreateLanguageCommand createLanguageCommand)
         {
