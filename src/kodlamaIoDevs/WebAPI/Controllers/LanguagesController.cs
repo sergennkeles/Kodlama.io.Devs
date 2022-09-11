@@ -7,8 +7,10 @@ using KodlamaIoDevs.Application.Features.Languages.Models;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLanguagesWithTechnologyQuery;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLangues;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetByIdLanguage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace WebAPI.Controllers
 {
@@ -39,6 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+    
         public async Task<IActionResult> Add([FromBody] CreateLanguageCommand createLanguageCommand)
         {
             CreateLanguageDto result = await Mediator.Send(createLanguageCommand);

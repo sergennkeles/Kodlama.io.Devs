@@ -1,4 +1,5 @@
-﻿using KodlamaIoDevs.Domain.Entities;
+﻿using Core.Security.Entities;
+using KodlamaIoDevs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -15,6 +16,9 @@ namespace KodlamaIoDevs.Persistence.Contexts
         protected IConfiguration Configuration { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Technology> Technologies { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
 
 
@@ -43,6 +47,8 @@ namespace KodlamaIoDevs.Persistence.Contexts
                 a.Property(p => p.Name).HasColumnName("Name");
                 a.HasOne(p => p.Language);
             });
+
+          
 
 
 
