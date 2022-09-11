@@ -5,6 +5,7 @@ using KodlamaIoDevs.Application.Features.Languages.Rules;
 using KodlamaIoDevs.Application.Features.Technologies.Rules;
 using KodlamaIoDevs.Application.Features.Users.Rules;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace KodlamaIoDevs.Application
             services.AddTransient<TechnologyBusinessRules>();
             services.AddTransient<UserBusinessRules>();
 
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
