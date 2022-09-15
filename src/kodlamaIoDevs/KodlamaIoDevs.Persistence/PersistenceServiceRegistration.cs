@@ -25,6 +25,8 @@ namespace KodlamaIoDevs.Persistence
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISocialRepository, SocialRepository>();
+
 
 
 
