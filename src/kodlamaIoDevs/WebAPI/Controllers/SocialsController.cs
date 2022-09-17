@@ -1,9 +1,11 @@
 ﻿using Core.Application.Requests;
 using KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage;
+using KodlamaIoDevs.Application.Features.Languages.Commands.UpdateLanguage;
 using KodlamaIoDevs.Application.Features.Languages.Dtos;
 using KodlamaIoDevs.Application.Features.Languages.Models;
 using KodlamaIoDevs.Application.Features.Languages.Queries.GetAllLangues;
 using KodlamaIoDevs.Application.Features.Socials.Commands.CreateSocial;
+using KodlamaIoDevs.Application.Features.Socials.Commands.UpdateSocial;
 using KodlamaIoDevs.Application.Features.Socials.Dtos;
 using KodlamaIoDevs.Application.Features.Socials.Models;
 using KodlamaIoDevs.Application.Features.Socials.Queries.GetAllSocialAccounts;
@@ -22,6 +24,13 @@ namespace WebAPI.Controllers
         {
             CreateSocialAccountDto result = await Mediator.Send(createSocialCommand);
             return Created("", result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateSocialAccountCommand updateSocialAccountCommand)
+        {
+            UpdateSocialAccountDto result = await Mediator.Send(updateSocialAccountCommand);
+            return Ok(result);
         }
 
         [HttpGet]

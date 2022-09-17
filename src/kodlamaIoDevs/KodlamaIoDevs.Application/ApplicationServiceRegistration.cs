@@ -2,6 +2,7 @@
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using KodlamaIoDevs.Application.Features.Languages.Rules;
+using KodlamaIoDevs.Application.Features.Socials.Rules;
 using KodlamaIoDevs.Application.Features.Technologies.Rules;
 using KodlamaIoDevs.Application.Features.Users.Rules;
 using MediatR;
@@ -28,6 +29,8 @@ namespace KodlamaIoDevs.Application
             services.AddTransient<LanguageBusinessRules>();
             services.AddTransient<TechnologyBusinessRules>();
             services.AddTransient<UserBusinessRules>();
+            services.AddTransient<SocialAccountBusinessRules>();
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
