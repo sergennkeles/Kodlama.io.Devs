@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.Socials.Dtos
 {
-    public class CreateSocialDto:BaseDto
+    public class CreateSocialAccountDto:BaseDto
     {
     }
 }

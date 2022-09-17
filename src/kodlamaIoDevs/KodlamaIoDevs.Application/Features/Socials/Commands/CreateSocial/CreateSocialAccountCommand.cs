@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.Socials.Commands.CreateSocial
 {
-    public class CreateSocialCommand:IRequest<CreateSocialDto>
+    public class CreateSocialAccountCommand:IRequest<CreateSocialAccountDto>
     {
         public int UserId { get; set; }
         public string Url { get; set; }
 
-        public class CreateSocialHandler : IRequestHandler<CreateSocialCommand, CreateSocialDto>
+        public class CreateSocialHandler : IRequestHandler<CreateSocialAccountCommand, CreateSocialAccountDto>
         {
             private readonly IMapper _mapper;
             private readonly ISocialRepository _repository;
@@ -27,11 +27,11 @@ namespace KodlamaIoDevs.Application.Features.Socials.Commands.CreateSocial
                 _repository = repository;
             }
 
-            public async Task<CreateSocialDto> Handle(CreateSocialCommand request, CancellationToken cancellationToken)
+            public async Task<CreateSocialAccountDto> Handle(CreateSocialAccountCommand request, CancellationToken cancellationToken)
             {
                 Social mappedSocial= _mapper.Map<Social>(request);
                 Social social = await _repository.AddAsync(mappedSocial);
-                CreateSocialDto createSocialDto=_mapper.Map<CreateSocialDto>(social);
+                CreateSocialAccountDto createSocialDto=_mapper.Map<CreateSocialAccountDto>(social);
                 return createSocialDto;
             }
         }

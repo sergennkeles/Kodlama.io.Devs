@@ -18,9 +18,9 @@ namespace WebAPI.Controllers
     {
         [HttpPost]
 
-        public async Task<IActionResult> Add([FromBody] CreateSocialCommand createSocialCommand)
+        public async Task<IActionResult> Add([FromBody] CreateSocialAccountCommand createSocialCommand)
         {
-            CreateSocialDto result = await Mediator.Send(createSocialCommand);
+            CreateSocialAccountDto result = await Mediator.Send(createSocialCommand);
             return Created("", result);
         }
 

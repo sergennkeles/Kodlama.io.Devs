@@ -16,8 +16,8 @@ namespace KodlamaIoDevs.Application.Features.Socials.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Social, CreateSocialCommand>().ReverseMap();
-            CreateMap<Social, CreateSocialDto>().ReverseMap();
+            CreateMap<Social, CreateSocialAccountCommand>().ReverseMap();
+            CreateMap<Social, CreateSocialAccountDto>().ReverseMap();
             CreateMap<IPaginate<Social>, SocialAccountListModel>().ReverseMap();
             CreateMap<Social, SocialAccountListDto>().ForMember(x=>x.UserName,opt=>opt.MapFrom(x=>x.User.FirstName)).ReverseMap();
 
