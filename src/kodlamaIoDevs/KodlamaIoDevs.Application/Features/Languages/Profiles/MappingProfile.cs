@@ -23,7 +23,7 @@ namespace KodlamaIoDevs.Application.Features.Languages.Profiles
             CreateMap<Language, UpdateLanguageCommand>().ReverseMap();
             CreateMap<IPaginate<Language>, LanguageListModel>().ReverseMap();
             CreateMap<IPaginate<Language>, LanguageListWithTechnologyModel>().ReverseMap();
-            CreateMap<Language, LanguageListWithTechnologyDto>().ForMember(x => x.TechnologyName, opt => opt.MapFrom(y => y.Technologies.ToList())).ReverseMap();    // buraya tekrar bak!
+            CreateMap<Language, LanguageListWithTechnologyDto>().ForMember(x => x.TechnologyName, opt => opt.MapFrom(y => y.Technologies.Select(a => a.Name).ToList())).ReverseMap();
             CreateMap<Language,LanguageListDto>().ReverseMap();
             CreateMap<Language, GetByIdLanguageDto>().ReverseMap();
 
