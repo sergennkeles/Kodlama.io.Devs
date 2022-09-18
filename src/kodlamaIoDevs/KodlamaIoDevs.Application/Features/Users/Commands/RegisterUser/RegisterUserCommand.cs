@@ -36,6 +36,7 @@ namespace KodlamaIoDevs.Application.Features.Users.Commands.RegisterUser
 
             public async Task<TokenDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
+                await _rules.CheckEmail(request.User.Email);
                 byte[] passwordHash, passwordSalt;
                 HashingHelper.CreatePasswordHash(request.User.Password, out passwordHash, out passwordSalt);
 

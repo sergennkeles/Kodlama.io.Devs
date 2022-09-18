@@ -35,6 +35,17 @@ namespace KodlamaIoDevs.Application.Features.Users.Rules
             return user;
         }
 
+        public async Task<bool> CheckEmail(string email)
+        {
+            var mail=await _repository.GetAsync(a => a.Email == email);
+            if (mail!=null)
+            {
+                throw new BusinessException("Bu mail adresi ile kayıtlı kullanıcı var");
+
+            }
+            return true;
+        }
+
         public bool Verify (string password, byte[] passwordHash, byte[]passwordSalt)
         {
             if (!HashingHelper.VerifyPasswordHash(password, passwordHash, passwordSalt))
