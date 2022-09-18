@@ -32,7 +32,7 @@ namespace KodlamaIoDevs.Application
             services.AddTransient<SocialAccountBusinessRules>();
 
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
