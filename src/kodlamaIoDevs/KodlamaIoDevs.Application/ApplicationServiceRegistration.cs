@@ -5,6 +5,7 @@ using KodlamaIoDevs.Application.Features.Languages.Rules;
 using KodlamaIoDevs.Application.Features.Socials.Rules;
 using KodlamaIoDevs.Application.Features.Technologies.Rules;
 using KodlamaIoDevs.Application.Features.Users.Rules;
+using KodlamaIoDevs.Application.Services.AuthService;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,7 @@ namespace KodlamaIoDevs.Application
             services.AddTransient<UserBusinessRules>();
             services.AddTransient<SocialAccountBusinessRules>();
 
+            services.AddScoped<IAuthService, AuthManager>();
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 

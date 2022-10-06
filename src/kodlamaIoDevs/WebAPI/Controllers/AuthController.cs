@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         {
            
             TokenDto result = await Mediator.Send(registerUserCommand);
-            return Created("", result);
+            return Created("", result.AccessToken);
         }
 
         [HttpPost("login")]

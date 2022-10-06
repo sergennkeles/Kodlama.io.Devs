@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Security.Entities;
+using Core.Security.JWT;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace KodlamaIoDevs.Application.Features.Users.Dtos
 {
     public class TokenDto
     {
-        public string Token { get; set; }
-        public DateTime Expiration { get; set; }
+        public AccessToken AccessToken { get; set; }
+        public RefreshToken RefreshToken { get; set; }
     }
 }

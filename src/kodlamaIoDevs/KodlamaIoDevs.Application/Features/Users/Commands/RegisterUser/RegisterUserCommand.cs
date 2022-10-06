@@ -5,6 +5,7 @@ using Core.Security.Hashing;
 using Core.Security.JWT;
 using KodlamaIoDevs.Application.Features.Users.Dtos;
 using KodlamaIoDevs.Application.Features.Users.Rules;
+using KodlamaIoDevs.Application.Services.AuthService;
 using KodlamaIoDevs.Application.Services.Repositories;
 using MediatR;
 using System;
@@ -15,26 +16,29 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.Users.Commands.RegisterUser
 {
-    public class RegisterUserCommand : IRequest<TokenDto>
+    public class RegisterUserCommand : IRequest<RegisteredDto>
     {
         public UserForRegisterDto User { get; set; }
+        public string IpAddress { get; set; }
 
-        public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, TokenDto>
+        public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, RegisteredDto>
         {
             private readonly IUserRepository _repository;
             private readonly IMapper _mapper;
+            private readonly IAuthService _authService;
             private readonly UserBusinessRules _rules;
-         
-            public RegisterUserHandler(IUserRepository repository, IMapper mapper, UserBusinessRules rules)
+
+            public RegisterUserHandler(IUserRepository repository, IMapper mapper, UserBusinessRules rules, IAuthService authService)
             {
                 _repository = repository;
                 _mapper = mapper;
                 _rules = rules;
+                _authService = authService;
             }
 
 
 
-            public async Task<TokenDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+            public async Task<RegisteredDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
                 await _rules.CheckEmail(request.User.Email);
                 byte[] passwordHash, passwordSalt;
@@ -47,14 +51,22 @@ namespace KodlamaIoDevs.Application.Features.Users.Commands.RegisterUser
                     Email = request.User.Email,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Status=true,          
+                    Status=true,
                 };
 
-               var token= _rules.CreateAccessToken(registerUser);
-                await _repository.AddAsync(registerUser);
-                TokenDto tokenDto=_mapper.Map<TokenDto>(token);
-                return tokenDto;
-                
+               User createdUser= await _repository.AddAsync(registerUser);
+
+                AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
+                RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
+                RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
+
+                RegisteredDto registeredDto = new()
+                {
+                    RefreshToken = addedRefreshToken,
+                    AccessToken = createdAccessToken,
+                };
+                return registeredDto;
+
             }
         }
     }
