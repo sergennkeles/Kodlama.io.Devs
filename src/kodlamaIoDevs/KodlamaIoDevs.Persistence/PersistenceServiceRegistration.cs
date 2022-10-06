@@ -27,7 +27,9 @@ namespace KodlamaIoDevs.Persistence
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISocialRepository, SocialRepository>();
 
-
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+            services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
 
 
             return services;
