@@ -16,6 +16,8 @@ namespace KodlamaIoDevs.Application.Features.OperationClaims.Profiles
         {
             CreateMap<OperationClaim, CreatedOperationClaimDto>().ReverseMap();
             CreateMap<OperationClaim, CreateOperationClaimCommand>().ReverseMap();
+            CreateMap<OperationClaim, UpdatedOperationClaimDto>().ReverseMap();
+
 
         }
     }

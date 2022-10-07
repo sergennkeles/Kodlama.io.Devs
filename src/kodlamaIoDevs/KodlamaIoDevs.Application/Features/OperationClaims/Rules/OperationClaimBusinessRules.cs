@@ -2,6 +2,7 @@
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using KodlamaIoDevs.Application.Services.Repositories;
+using KodlamaIoDevs.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,13 @@ namespace KodlamaIoDevs.Application.Features.OperationClaims.Rules
 
             IPaginate<OperationClaim> result = await _repository.GetListAsync(b => b.Name == name);
             if (result.Items.Any()) throw new BusinessException("Bu isimde claim  zaten var.");
+        }
+
+        public async Task<OperationClaim> GetOperationClaimAsync(int id)
+        {
+            OperationClaim claim = await _repository.GetAsync(x => x.Id == id);
+            if (claim == null) throw new BusinessException("Böyle bir claim yok.");
+            return claim;
         }
     }
 }
