@@ -5,8 +5,11 @@ using KodlamaIoDevs.Application.Features.Languages.Rules;
 using KodlamaIoDevs.Application.Features.OperationClaims.Rules;
 using KodlamaIoDevs.Application.Features.Socials.Rules;
 using KodlamaIoDevs.Application.Features.Technologies.Rules;
+using KodlamaIoDevs.Application.Features.UserOperationClaims.Rules;
 using KodlamaIoDevs.Application.Features.Users.Rules;
 using KodlamaIoDevs.Application.Services.AuthService;
+using KodlamaIoDevs.Application.Services.OperationClaimService;
+using KodlamaIoDevs.Application.Services.UserService;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,9 +37,15 @@ namespace KodlamaIoDevs.Application
             services.AddTransient<UserBusinessRules>();
             services.AddTransient<SocialAccountBusinessRules>();
             services.AddTransient<OperationClaimBusinessRules>();
+            services.AddTransient<UserOperationClaimBusinessRules>();
+
 
 
             services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IOperationClaimService, OperationClaimManager>();
+
+
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 

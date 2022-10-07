@@ -8,9 +8,14 @@
 
   <ItemGroup>
     <Folder Include="Features\Languages\Constants\" />
+    <Folder Include="Features\UserOperationClaims\Commands\DeleteUserOperationClaim\" />
+    <Folder Include="Features\UserOperationClaims\Constants\" />
     <Folder Include="Features\OperationClaims\Constants\" />
     <Folder Include="Features\Socials\Constants\" />
     <Folder Include="Features\Technologies\Constants\" />
+    <Folder Include="Features\UserOperationClaims\Dtos\" />
+    <Folder Include="Features\UserOperationClaims\Models\" />
+    <Folder Include="Features\UserOperationClaims\Queries\GetAllClaims\" />
     <Folder Include="Features\Users\Constants\" />
     <Folder Include="Features\Users\Models\" />
     <Folder Include="Features\Users\Queries\" />
