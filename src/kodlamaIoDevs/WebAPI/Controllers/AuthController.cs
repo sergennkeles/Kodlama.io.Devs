@@ -25,19 +25,23 @@ namespace WebAPI.Controllers
             return Created("", result.AccessToken);
         }
 
+       
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
+        {
+            LoginUserCommand loginUserCommand = new() { Login = userForLoginDto, IpAddress = GetIpAddress() };
+            LoginDto result = await Mediator.Send(loginUserCommand);
+            SetRefreshTokenToCookie(result.RefreshToken);
+            return Ok(result.AccessToken);
+        }
+
+
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)
         {
             CookieOptions cookieOptions = new() { HttpOnly = true, Expires = DateTime.Now.AddDays(7) };
             Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
         }
 
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserCommand loginUserCommand)
-        {
-
-            TokenDto result = await Mediator.Send(loginUserCommand);
-            return Ok(result);
-        }
     }
 }
