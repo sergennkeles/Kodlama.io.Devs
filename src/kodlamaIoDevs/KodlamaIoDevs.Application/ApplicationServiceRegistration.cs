@@ -2,6 +2,7 @@
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using KodlamaIoDevs.Application.Features.Languages.Rules;
+using KodlamaIoDevs.Application.Features.OperationClaims.Rules;
 using KodlamaIoDevs.Application.Features.Socials.Rules;
 using KodlamaIoDevs.Application.Features.Technologies.Rules;
 using KodlamaIoDevs.Application.Features.Users.Rules;
@@ -27,10 +28,13 @@ namespace KodlamaIoDevs.Application
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
             services.AddTransient<LanguageBusinessRules>();
             services.AddTransient<TechnologyBusinessRules>();
             services.AddTransient<UserBusinessRules>();
             services.AddTransient<SocialAccountBusinessRules>();
+            services.AddTransient<OperationClaimBusinessRules>();
+
 
             services.AddScoped<IAuthService, AuthManager>();
 
