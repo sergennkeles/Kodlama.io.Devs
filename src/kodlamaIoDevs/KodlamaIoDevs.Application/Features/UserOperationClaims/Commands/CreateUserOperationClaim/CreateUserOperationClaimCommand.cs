@@ -30,8 +30,8 @@ namespace KodlamaIoDevs.Application.Features.UserOperationClaims.Commands.Create
             }
 
             public async Task<string> Handle(CreateUserOperationClaimCommand request, CancellationToken cancellationToken)
-            { 
-               
+            {
+                await _rules.UserOperationClaimCanNotBeDuplicatedWhenInserted(request.OperationClaimId);
                 await _rules.GetByOperationClaimId(request.OperationClaimId);
                 await _rules.GetByUserId(request.UserId);
                 UserOperationClaim userOperationClaim = _mapper.Map<UserOperationClaim>(request);

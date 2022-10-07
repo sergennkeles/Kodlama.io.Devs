@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Languages\Constants\" />
-    <Folder Include="Features\UserOperationClaims\Commands\DeleteUserOperationClaim\" />
     <Folder Include="Features\UserOperationClaims\Constants\" />
     <Folder Include="Features\OperationClaims\Constants\" />
     <Folder Include="Features\Socials\Constants\" />

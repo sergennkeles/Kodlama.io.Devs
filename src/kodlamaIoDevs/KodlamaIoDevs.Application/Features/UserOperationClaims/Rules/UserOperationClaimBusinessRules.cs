@@ -34,9 +34,22 @@ namespace KodlamaIoDevs.Application.Features.UserOperationClaims.Rules
 
         public async Task GetByOperationClaimId(int id)
         {
-           var operationClaim=  await _userService.GetByUserIdAsync(id);
+           var operationClaim=  await _operationClaimService.GetOperationClaimByIdAsync(id);
             if (operationClaim == null) throw new BusinessException("Böyle bir claim yok.");
 
+        }
+
+        public async Task UserOperationClaimCanNotBeDuplicatedWhenInserted(int id)
+        {
+            UserOperationClaim claim = await _repository.GetAsync(x => x.OperationClaim.Id == id);
+            if (claim != null) throw new BusinessException("Kullanıcıya bu claim daha önce tanımlanmış.");
+        }
+
+        public async Task<UserOperationClaim> GetByUserOperationClaim(int id)
+        {
+            UserOperationClaim getUserOperationClaim=await _repository.GetAsync(x=>x.Id==id);
+            if (getUserOperationClaim == null) throw new BusinessException("Bu kullanıcı için tanımlı bir claim yok.");
+            return getUserOperationClaim;
         }
     }
 }
