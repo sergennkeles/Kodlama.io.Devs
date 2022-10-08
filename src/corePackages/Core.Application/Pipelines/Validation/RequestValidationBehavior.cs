@@ -10,7 +10,7 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
     public RequestValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
-    {
+   {
         _validators = validators;
     }
 
