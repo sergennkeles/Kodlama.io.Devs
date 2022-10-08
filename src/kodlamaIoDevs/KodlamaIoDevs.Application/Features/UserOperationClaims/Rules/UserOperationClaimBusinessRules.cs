@@ -39,9 +39,17 @@ namespace KodlamaIoDevs.Application.Features.UserOperationClaims.Rules
 
         }
 
-        public async Task UserOperationClaimCanNotBeDuplicatedWhenInserted(int id)
+        public async Task UserOperationClaimCanNotBeDuplicatedWhenInserted(int userId,int claimId)
         {
-            UserOperationClaim claim = await _repository.GetAsync(x => x.OperationClaim.Id == id);
+            UserOperationClaim claim = await _repository.GetAsync(x => x.OperationClaim.Id == claimId);
+            User user= await _userService.GetByUserIdAsync(userId);
+            if (user!=null)
+            {
+                if (claim==null)
+                {
+                    // buraya tekrar bak
+                }
+            }
             if (claim != null) throw new BusinessException("Kullanıcıya bu claim daha önce tanımlanmış.");
         }
 

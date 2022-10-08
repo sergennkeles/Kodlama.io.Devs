@@ -17,7 +17,7 @@ namespace KodlamaIoDevs.Application.Features.Languages.Commands.CreateLanguage
     {
         public string? Name { get; set; }
 
-        public string[] Roles => new String[] {"admin" };
+        public string[] Roles => new String[] {"admin","Admin" };
 
         public class CreateLanguageHandler : IRequestHandler<CreateLanguageCommand, CreateLanguageDto>
         {

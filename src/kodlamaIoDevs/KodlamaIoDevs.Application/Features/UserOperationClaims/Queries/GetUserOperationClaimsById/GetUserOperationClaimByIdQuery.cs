@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
@@ -18,9 +19,10 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.UserOperationClaims.Queries.GetUserOperationClaimsById
 {
-    public class GetUserOperationClaimByIdQuery:IRequest<UserOperationClaimListModel>
+    public class GetUserOperationClaimByIdQuery:IRequest<UserOperationClaimListModel>,ISecuredRequest
     {
         public int UserId { get; set; }
+        public string[] Roles => new String[] { "Admin","Moderator","Editor" };
 
         public class GetUserOperationClaimByIdQueryHandler : IRequestHandler<GetUserOperationClaimByIdQuery, UserOperationClaimListModel>
         {

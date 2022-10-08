@@ -1,4 +1,5 @@
-﻿using Core.Security.Entities;
+﻿using Core.Application.Pipelines.Authorization;
+using Core.Security.Entities;
 using KodlamaIoDevs.Application.Features.UserOperationClaims.Rules;
 using KodlamaIoDevs.Application.Services.Repositories;
 using MediatR;
@@ -10,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace KodlamaIoDevs.Application.Features.UserOperationClaims.Commands.DeleteUserOperationClaim
 {
-    public class DeleteUserOperationClaimCommand:IRequest<String>
+    public class DeleteUserOperationClaimCommand:IRequest<String>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] Roles => new String[] { "Admin" };
 
         public class DeleteUserOperationClaimHandler : IRequestHandler<DeleteUserOperationClaimCommand, String>
         {
